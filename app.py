@@ -34,7 +34,7 @@ def suggest_outfit(temp):
     else:
         return "❄️ Cold weather! Wear a coat, scarf, gloves, and boots."
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html")
 
