@@ -41,11 +41,11 @@ def index():
 @app.route("/weather", methods=["GET", "POST"])
 def weather():
     if request.method == "POST":
-    city = request.form["city"]
-    weather_desc, temp = get_weather(city)
-    return render_template("weather_result.html", weather_desc, temp=temp)
-else:
-    return render_template("weather_form.html")
+       city = request.form["city"]
+       weather_desc, temp = get_weather(city)
+       return render_template("weather_result.html", weather_desc, temp=temp)
+    else:
+       return render_template("weather_form.html")
     outfit = suggest_outfit(temp)
     return render_template("index.html", weather=weather_desc, outfit=outfit)
 
