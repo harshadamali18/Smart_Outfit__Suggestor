@@ -43,13 +43,14 @@ def weather():
     if request.method == "POST":
        city = request.form["city"]
        weather_desc, temp = get_weather(city)
-       return render_template("weather_result.html", weather_desc, temp=temp)
+       outfit = suggest_outfit(temp)
+       return render_template("index.html", weather=weather_desc, temp=temp, outfit=outfit)
     else:
+       
        return render_template("weather_form.html")
-    outfit = suggest_outfit(temp)
-    return render_template("index.html", weather=weather_desc, outfit=outfit)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
     app.run(debug=True)
+
