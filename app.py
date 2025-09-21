@@ -1,13 +1,14 @@
 
+
 from flask import Flask, render_template, request
 import requests
-import os
+
 
 app = Flask(__name__)
 
 def get_weather(city):
     try:
-        url = f"https://wttr.in/{city}?format=j1"
+        url = f"https://wttr.in/pune?format=j1"
         response = requests.get(url)
         data = response.json()
 
@@ -34,23 +35,18 @@ def suggest_outfit(temp):
     else:
         return "❄️ Cold weather! Wear a coat, scarf, gloves, and boots."
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
 
-@app.route("/weather", methods=["GET", "POST"])
+@app.route("/weather", methods=["POST"])
 def weather():
-    if request.method == "POST":
-       city = request.form["city"]
-       weather_desc, temp = get_weather(city)
-       outfit = suggest_outfit(temp)
-       return render_template("index.html", weather=weather_desc, temp=temp, outfit=outfit)
-    else:
-       
-       return render_template("weather_form.html")
+    
+        city = request.form["city"]
+        weather_desc, temp = get_weather(city)
+        outfit = suggest_outfit(temp)
+        return render_template("index.html", weather=weather_desc, outfit=outfit)
+    
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
     app.run(debug=True)
-
