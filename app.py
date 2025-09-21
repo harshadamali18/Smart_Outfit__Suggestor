@@ -48,5 +48,5 @@ def weather():
         return render_template("index.html", weather=weather_desc, outfit=outfit)
     
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+    
