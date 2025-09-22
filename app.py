@@ -4,7 +4,8 @@ from flask import Flask, render_template, request
 import requests
 
 
-app = Flask(__name__)
+##app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 def get_weather(city):
     try:
@@ -47,6 +48,8 @@ def weather():
         outfit = suggest_outfit(temp)
         return render_template("index.html", weather=weather_desc, outfit=outfit)
     
-
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
 
     
